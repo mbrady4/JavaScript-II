@@ -40,30 +40,71 @@ const items = ['Pencil', 'Notebook', 'yo-yo', 'Gum'];
 
 
 function getLength(arr, cb) {
-  // getLength passes the length of the array into the callback.
+  return cb(arr.length);
 }
+
+const test1 = getLength(items, len => `Lenght of ${len}.`);
+console.log(test1);
 
 function last(arr, cb) {
-  // last passes the last item of the array into the callback.
+  return cb(arr[arr.length - 1]);
 }
+
+const test2 = last(items, item => `The last item is ${item}.`);
+console.log(test2);
 
 function sumNums(x, y, cb) {
-  // sumNums adds two numbers (x, y) and passes the result to the callback.
+  return cb(x, y);
 }
 
-function multiplyNums(x, y, cb) {
-  // multiplyNums multiplies two numbers and passes the result to the callback.
+function sum(num1, num2) {
+  return num1+num2;
 }
+
+const test3 = sumNums(5,6, sum);
+
+console.log(test3);
+
+function multiplyNums(x, y, cb) {
+  return cb(x * y);
+}
+
+function printMultipliedNums(num) {
+  return `Here is the product of the numbers: ${num}.`;
+}
+
+console.log(multiplyNums(5,6,printMultipliedNums));
 
 function contains(item, list, cb) {
   // contains checks if an item is present inside of the given array/list.
   // Pass true to the callback if it is, otherwise pass false.
+  return cb(list.includes(item));
 }
 
+function containsReport(binary) {
+  if(binary == true) {
+    return `The item is included in the list.`;
+  }
+  else {
+    return `The item is not included in the list.`;
+  }
+}
+
+console.log(contains('Gum', items, containsReport));
+
 /* STRETCH PROBLEM */
+const duplicateItems = ['Pencil', 'Pencil', 'Pencil', 'Pencil', 'Notebook', 'yo-yo', 'Gum'];
 
 function removeDuplicates(array, cb) {
   // removeDuplicates removes all duplicate values from the given array.
   // Pass the duplicate free array to the callback function.
   // Do not mutate the original array.
+  let newArray = new Set(array);
+  return cb(Array.from(newArray));
 }
+
+function printSet(array) {
+  console.log(array);
+}
+
+removeDuplicates(duplicateItems, printSet);
